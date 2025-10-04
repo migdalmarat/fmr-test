@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs/internal/Observable';
+import { getIsLoading } from './shared/shared.selector';
+import { Store } from '@ngrx/store';
+import { AppState } from './store/app.state';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +19,9 @@ export class AppComponent {
 
   showLoading$: Observable<boolean> | undefined;
 
-  // store: Store<AppState> = inject(Store<AppState>);
+  store: Store<AppState> = inject(Store<AppState>);
 
   ngOnInit(): void {
-    // this.showLoading$ = this.store.select(getIsLoading);
+    this.showLoading$ = this.store.select(getIsLoading);
   }
 }

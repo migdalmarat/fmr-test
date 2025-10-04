@@ -1,20 +1,13 @@
-<div class="card">
-  <div class="card-header">
-    {{ pageTitle }}
-  </div>
-
-  <div class="card-body">
-    <div class="list-group">
-      <!-- @for (vehicle of filteredVehicles(); track vehicle) {
-      <button
-        type="button"
-        class="list-group-item"
-        [ngClass]="{ active: vehicle?.name === selectedVehicle()?.name }"
-        (click)="onSelected(vehicle.name)"
-      >
-        {{ vehicle.name }}
-      </button>
-      } -->
-    </div>
-  </div>
+<h2>User List</h2>
+<div class="user-list-container">
+  @for (user of users$ | async; track user.id) {
+    <mat-card class="user-card" (click)="onSelected(user.id)">
+      <mat-card-header>
+        <mat-card-title>User ID {{ user.id }}</mat-card-title>
+      </mat-card-header> 
+      <mat-card-content>
+        {{ user.name }}
+      </mat-card-content>
+    </mat-card>
+  }
 </div>

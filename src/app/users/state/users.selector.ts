@@ -4,7 +4,7 @@ import { USERS_STATE } from '../../constants';
 import {
   getQueryParams,
   getRouterParams,
-} from 'src/app/store/router/router.selector';
+} from '../../store/router/router.selector';
 import { Params } from '@angular/router';
 
 const getUsersState = createFeatureSelector<UsersState>(USERS_STATE);

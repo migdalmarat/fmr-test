@@ -2,6 +2,11 @@ import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { User } from '../../models/user.model';
 
+export const showForm = createAction(
+  '[users] show form',
+  props<{ value: boolean }>()
+);
+
 export const createUser = createAction(
   '[users] create user',
   props<{ user: User }>()

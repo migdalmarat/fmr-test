@@ -5,11 +5,18 @@ import {
   createUserSuccess,
   deleteUserSuccess,
   readUsersSuccess,
+  showForm,
   updateUserSuccess,
 } from './users.actions';
 
 export const usersReducer = createReducer(
   initialState,
+    on(showForm, (state, action) => {
+      return {
+          ...state,
+          showForm: action.value
+      }
+  }),
   on(createUserSuccess, (state, action) => {
     return userAdapter.addOne(action.user, state);
   }),

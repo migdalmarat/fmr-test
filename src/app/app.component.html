@@ -1,11 +1,7 @@
 @if (showLoading$ | async) {
-<app-loader *ngIf=""></app-loader>
+<app-loader></app-loader>
 }
-
-<div class="app-container">
-  <app-header></app-header>
-
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+<app-header></app-header>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>

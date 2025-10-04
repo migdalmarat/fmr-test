@@ -7,10 +7,12 @@ export const userAdapter = createEntityAdapter<User>({
 });
 
 export interface UsersState extends EntityState<User> {
+  showForm: boolean;
   loaded: boolean;
 }
 
 export const initialState: UsersState = userAdapter.getInitialState({
+  showForm: false,
   loaded: false,
 });
 
