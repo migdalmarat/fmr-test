@@ -2,28 +2,40 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs/internal/Observable';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { User } from '../../models/user.model';
-import { getShowForm, getUsers } from '../state/users.selector';
-import { readUsers } from '../state/users.actions';
+import {
+  getSelectedUserId,
+  getShowForm,
+  getUsers,
+} from '../state/users.selector';
+import { readUsers, selectUser } from '../state/users.actions';
 import { AppState } from '../../store/app.state';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule, MatCardModule, AsyncPipe],
+  imports: [CommonModule, MatCardModule, AsyncPipe, UserComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements OnInit {
-  users$: Observable<User[]> | null = null;
-  showForm$: Observable<boolean> | null = null;
   store: Store<AppState> = inject(Store);
+  users$ = this.store.select(getUsers);
+  showForm$ = this.store.select(getShowForm);
+  selectedUserId$ = this.store.select(getSelectedUserId);
+  selectedUser$ = combineLatest([this.users$, this.selectedUserId$]).pipe(
+    map(([users, selectedUserId]) => users.find((u) => u.id === selectedUserId)
+    )
+  );
 
   ngOnInit() {
     this.store.dispatch(readUsers());
-    this.users$ = this.store.select(getUsers);
-    this.showForm$ = this.store.select(getShowForm);
   }
 
-  onSelected(userName: number): void {}
+  onSelected(userID: number): void {
+    this.store.dispatch(selectUser({ userId: userID }));
+  }
 }

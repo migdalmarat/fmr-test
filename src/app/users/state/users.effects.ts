@@ -42,7 +42,6 @@ export class UsersEffect {
         this.store.dispatch(setIsLoading({ value: true }));
         return this.userService.readUsers().pipe(
           map((data) => {
-            console.log('data  : ',JSON.stringify(data) );
             this.store.dispatch(setIsLoading({ value: false }));
             return readUsersSuccess({ users: data });
           }),

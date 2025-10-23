@@ -11,10 +11,11 @@ const getUsersState = createFeatureSelector<UsersState>(USERS_STATE);
 
 const { selectAll } = userAdapter.getSelectors();
 
-export const getUsers = createSelector(getUsersState, (state) => {
-  return selectAll(state);
-});
 
+export const getUsers = createSelector(getUsersState, (state) => selectAll(state));
+export const getSelectedUserId = createSelector(getUsersState, (state) => {
+  return state.selectedUserId;
+});
 export const getShowForm = createSelector(getUsersState, (state) => {
   return state.showForm;
 });

@@ -8,7 +8,15 @@ export const routes: Routes = [
     path: 'users',
     loadComponent: () =>
       import('./users/users.component').then((c) => c.UsersComponent),
+    children: [
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./users/user-detail/user-detail.component').then(
+            (c) => c.UserDetailComponent
+          ),
+      },
+    ],
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

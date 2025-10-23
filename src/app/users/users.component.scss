@@ -1,6 +1,8 @@
 .row {
   display: flex;
-  flex-wrap: wrap;
+  height: calc(100vh - 120px);
+  gap: 2rem;
+  background-color: var(--color-grey-light-3);
 }
 
 .col-4 {

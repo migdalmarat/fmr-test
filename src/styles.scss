@@ -40,16 +40,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: var(--color-grey-dark-2);
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right bottom,
-    from(var(--color-grey-light-1)),
-    to(var(--color-grey-light-3))
-  );
-
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: #ffff;
   min-height: 100vh;
   overflow: hidden;
 }

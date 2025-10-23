@@ -6,11 +6,11 @@ import { getShowForm, getUsers } from './state/users.selector';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { readUsers, showForm } from './state/users.actions';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-users',
-  imports: [UserListComponent, UserDetailComponent],
+  imports: [UserListComponent, RouterOutlet],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -7,21 +7,16 @@ import { Observable } from 'rxjs/internal/Observable';
 import { getIsLoading } from './shared/shared.selector';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/app.state';
+import { UsersComponent } from "./users/users.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, LoaderComponent, AsyncPipe],
+  imports: [HeaderComponent, LoaderComponent, AsyncPipe, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush 
 })
 export class AppComponent {
-  title = 'fmr-test';
-
-  showLoading$: Observable<boolean> | undefined;
-
-  store: Store<AppState> = inject(Store<AppState>);
-
-  ngOnInit(): void {
-    this.showLoading$ = this.store.select(getIsLoading);
-  }
+  private store: Store<AppState> = inject(Store<AppState>);
+  showLoading$: Observable<boolean> = this.store.select(getIsLoading);
 }
