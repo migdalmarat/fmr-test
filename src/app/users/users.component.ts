@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { Store } from '@ngrx/store';
-import { getShowForm, getUsers } from './state/users.selector';
+import { selectShowForm, selectUsers } from './state/users.selectors';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { readUsers, showForm } from './state/users.actions';
@@ -20,8 +20,8 @@ export class UsersComponent {
   // store: Store = inject(Store);
   // router: Router = inject(Router);
   // ngOnInit() {
-  //   this.users$ = this.store.select(getUsers);
-  //   this.showForm$ = this.store.select(getShowForm);
+  //   this.users$ = this.store.select(selectUsers);
+  //   this.showForm$ = this.store.select(selectShowForm);
   //   this.store.dispatch(readUsers());
   // }
   // showCreateForm() {

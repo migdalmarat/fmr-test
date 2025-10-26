@@ -27,7 +27,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { ROUTER_NAVIGATED, RouterNavigatedAction } from '@ngrx/router-store';
 import { Update } from '@ngrx/entity';
-import { selectUsersLoaded } from './users.selector';
+import { selectUsersLoaded } from './users.selectors';
 
 @Injectable()
 export class UsersEffect {

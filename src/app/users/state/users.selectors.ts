@@ -7,21 +7,25 @@ import {
 } from '../../store/router/router.selector';
 import { Params } from '@angular/router';
 
-const getUsersState = createFeatureSelector<UsersState>(USERS_STATE);
+export const selectUsersState = createFeatureSelector<UsersState>(USERS_STATE);
 
-const { selectAll } = userAdapter.getSelectors();
+export const { selectAll, selectEntities, selectIds, selectTotal } =
+  userAdapter.getSelectors(selectUsersState);
+
+export const selectUsers = selectAll;
+
+export const selectUsersEntities = selectEntities;
 
 
-export const getUsers = createSelector(getUsersState, (state) => selectAll(state));
-export const getSelectedUserId = createSelector(getUsersState, (state) => {
+export const selectSelectedUserId = createSelector(selectUsersState, (state) => {
   return state.selectedUserId;
 });
-export const getShowForm = createSelector(getUsersState, (state) => {
+export const selectShowForm = createSelector(selectUsersState, (state) => {
   return state.showForm;
 });
 
-export const getUserByIdParams = createSelector(
-  getUsersState,
+export const selectUserByIdParams = createSelector(
+  selectUsersState,
   getRouterParams,
   (state, params: Params) => {
     return selectAll(state).find((user) => user.id === params['id']);
@@ -29,13 +33,13 @@ export const getUserByIdParams = createSelector(
 );
 
 export const getUserByIdQueryParams = createSelector(
-  getUsersState,
+  selectUsersState,
   getQueryParams,
   (state, params: Params) => {
     return selectAll(state).find((user) => user.id === params['id']);
   }
 );
 
-export const selectUsersLoaded = createSelector(getUsersState, (state) => {
+export const selectUsersLoaded = createSelector(selectUsersState, (state) => {
   return state.loaded;
 });

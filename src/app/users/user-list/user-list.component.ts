@@ -5,10 +5,10 @@ import { Observable } from 'rxjs/internal/Observable';
 import { select, Store } from '@ngrx/store';
 import { User } from '../../models/user.model';
 import {
-  getSelectedUserId,
-  getShowForm,
-  getUsers,
-} from '../state/users.selector';
+  selectSelectedUserId,
+  selectShowForm,
+  selectUsers,
+} from '../state/users.selectors';
 import { readUsers, selectUser } from '../state/users.actions';
 import { AppState } from '../../store/app.state';
 import { combineLatest } from 'rxjs';
@@ -23,9 +23,9 @@ import { UserComponent } from '../user/user.component';
 })
 export class UserListComponent implements OnInit {
   store: Store<AppState> = inject(Store);
-  users$ = this.store.select(getUsers);
-  showForm$ = this.store.select(getShowForm);
-  selectedUserId$ = this.store.select(getSelectedUserId);
+  users$ = this.store.select(selectUsers);
+  showForm$ = this.store.select(selectShowForm);
+  selectedUserId$ = this.store.select(selectSelectedUserId);
   selectedUser$ = combineLatest([this.users$, this.selectedUserId$]).pipe(
     map(([users, selectedUserId]) => users.find((u) => u.id === selectedUserId)
     )
@@ -33,9 +33,5 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(readUsers());
-  }
-
-  onSelected(userID: number): void {
-    this.store.dispatch(selectUser({ userId: userID }));
   }
 }

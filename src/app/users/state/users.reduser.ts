@@ -14,9 +14,9 @@ import {
 
 export const usersReducer = createReducer(
   initialState,
-  on(readUsersSuccess, (state, action) => {
-    return userAdapter.setAll(action.users, { ...state, loaded: true });
-  }),
+  on(readUsersSuccess, (state, action) => 
+     userAdapter.setAll(action.users, { ...state, loaded: true })
+  ),
   on(selectUser, (state, action) => {
     return {
       ...state,

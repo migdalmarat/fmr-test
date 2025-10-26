@@ -1,15 +1,14 @@
 @let selectedUserId = selectedUserId$ | async;
-<a [routerLink]="['/users', user().id]" routerLinkActive="selected">
-  <mat-card
-    class="user-card"
-    (click)="onSelected(user().id)"
-    [ngClass]="{ selected: user().id === selectedUserId }"
-  >
-    <mat-card-header>
-      <mat-card-title>ID {{ user().id }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      {{ user().name }}
-    </mat-card-content>
-  </mat-card>
-</a>
+
+<mat-card
+  class="user-card"
+  (click)="onSelected(user().id)"
+  [ngClass]="{ selected: user().id === selectedUserId }"
+>
+  <mat-card-header>
+    <mat-card-title>ID {{ user().id }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{ user().name }}
+  </mat-card-content>
+</mat-card>
